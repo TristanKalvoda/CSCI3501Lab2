@@ -1,6 +1,11 @@
 public class TestInteger implements Comparable<TestInteger> {
     int value;
     static long counter;
+
+    public TestInteger(int value) {
+        this.value = value;
+    }
+
     @Override
     public int compareTo(TestInteger other) {
         if (this.value == other.value) {
@@ -21,6 +26,11 @@ public class TestInteger implements Comparable<TestInteger> {
 
     public static void resetCounter(){
         counter = 0;
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(value);
     }
     
 }
