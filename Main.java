@@ -4,11 +4,66 @@ import java.lang.Math;
 public class Main {
 
     public static void main (String[] args) {
-    int[] array1 = {30, 45, 50, 100, 200};
     TestInteger[] testInteger1 = new TestInteger[10000];
         for (int i = 0; i <= 9999; i++) {
             testInteger1[i] = new TestInteger (i);
     }
+
+    TestInteger[] generateTestInt1 = generateTestIntegers();
+    TestInteger[] generateTestInt2 = generateTestInt1;
+    
+    // TEST CASES 1
+    System.out.println("\nTest Case 1");
+
+    long starttimequick = System.currentTimeMillis();
+    quickSort(generateTestInt1, 0, generateTestInt1.length-1);
+    long endtimequick = System.currentTimeMillis();
+
+    // prints last 5 elements
+    // for (int i = generateTestInt1.length-5; i < generateTestInt1.length; i++) {
+    //     System.out.println(generateTestInt1[i]);
+    // }
+
+    System.out.println("TimeQuickSort " + (endtimequick - starttimequick) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter() + "\n");
+    
+
+    TestInteger.resetCounter();
+
+    long starttimemerge = System.currentTimeMillis();
+    Arrays.sort(generateTestInt2);
+    long endtimemerge = System.currentTimeMillis();
+
+    // prints last 5 elements
+    // for (int i = generateTestInt2.length-5; i < generateTestInt2.length; i++) {
+    //     System.out.println(generateTestInt2[i]);
+    // }
+
+    System.out.println("TimeMergeSort " + (endtimemerge - starttimemerge) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter());
+    
+
+    // TEST CASES 2
+    System.out.println("\nTest Case 2");
+
+    TestInteger.resetCounter();
+
+    long starttimemerge1 = System.currentTimeMillis();
+    Arrays.sort(testInteger1);
+    long endtimemerge1 = System.currentTimeMillis();
+    System.out.println("TimeMergeSort1 " + (endtimemerge1 - starttimemerge1) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter() + "\n");
+    
+    TestInteger.resetCounter();
+
+    long starttimequick1 = System.currentTimeMillis();
+    quickSort(testInteger1, 0, testInteger1.length-1);
+    long endtimequick1 = System.currentTimeMillis();
+    System.out.println("TimeQuickSort1 " + (endtimequick1 - starttimequick1) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter());
+    
+    // TEST CASES 3
+    System.out.println("\nTest Case 3");
 
     TestInteger[] testInteger1000sequences = new TestInteger[10000];
     for (int i=0; i < 10; i++) {
@@ -18,65 +73,25 @@ public class Main {
         }
     }
 
+    TestInteger.resetCounter();
+
     long starttimemerge2 = System.currentTimeMillis();
     Arrays.sort(testInteger1000sequences);
     long endtimemerge2 = System.currentTimeMillis();
 
-    System.out.println("TimeMergeSort2 " + (endtimemerge2 - starttimemerge2) + " ms\n");
+    System.out.println("TimeMergeSort2 " + (endtimemerge2 - starttimemerge2) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter() + "\n");
+
+    TestInteger.resetCounter();
 
     long starttimequick2 = System.currentTimeMillis();
     quickSort(testInteger1, 0, testInteger1000sequences.length-1);
     long endtimequick2 = System.currentTimeMillis();
 
-    System.out.println("TimeQuickSort2 " + (endtimequick2 - starttimequick2) + " ms\n");
-
-    // System.out.println(Arrays.toString(testInteger1000sequences));
-    long starttimemerge1 = System.currentTimeMillis();
-    Arrays.sort(testInteger1);
-    long endtimemerge1 = System.currentTimeMillis();
-    // System.out.println(Arrays.toString(testInteger1));
-    System.out.println("TimeMergeSort1 " + (endtimemerge1 - starttimemerge1) + " ms\n");
-
-    long starttimequick1 = System.currentTimeMillis();
-    quickSort(testInteger1, 0, testInteger1.length-1);
-    long endtimequick1 = System.currentTimeMillis();
-
-    // System.out.println(Arrays.toString(testInteger1));
-    System.out.println("TimeQuickSort2 " + (endtimequick1 - starttimequick1) + " ms\n");
-    TestInteger[] generateTestInt1 = generateTestIntegers();
-    TestInteger[] generateTestInt2 = generateTestInt1;
-    
-
-    long starttimequick = System.currentTimeMillis();
-    quickSort(generateTestInt1, 0, generateTestInt1.length-1);
-    // System.err.println(Arrays.toString(generateTestInt1));
-    // prints last 5 elements
-    long endtimequick = System.currentTimeMillis();
-
-    for (int i = generateTestInt1.length-5; i < generateTestInt1.length; i++) {
-        System.out.println(generateTestInt1[i]);
-    }
-    System.out.println("Counting for Quicksort");
+    System.out.println("TimeQuickSort2 " + (endtimequick2 - starttimequick2) + " ms");
     System.out.println("Counting : " + TestInteger.getCounter());
-    System.out.println("TimeQuickSort " + (endtimequick - starttimequick) + " ms\n");
-
-    TestInteger.resetCounter();
-
-    long starttimemerge = System.currentTimeMillis();
-    Arrays.sort(generateTestInt2);
-    // prints last 5 elements
-    long endtimemerge = System.currentTimeMillis();
-
-    for (int i = generateTestInt2.length-5; i < generateTestInt2.length; i++) {
-        System.out.println(generateTestInt2[i]);
-    }
-
-    System.out.println("Counting for Mergesort");
-    System.out.println("Counting : " + TestInteger.getCounter());
-    System.out.println("TimeMergeSort " + (endtimemerge - starttimemerge) + " ms\n");
 
 
-    
     }
 
     public static void quickSort(TestInteger[] testInteger, int startInd, int endInd){
