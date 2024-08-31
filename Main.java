@@ -1,6 +1,8 @@
 import java.util.Arrays;
 import java.lang.Math;
 
+// Authors: Tristan Kalvoda - Andrew Lam 
+// CSCI 3 5 0 1 LAB 2 Part 1
 public class Main {
 
     public static void main (String[] args) {
