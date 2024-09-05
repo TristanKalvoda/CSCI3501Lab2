@@ -144,11 +144,11 @@ public class Main {
     }
 
     private static int partition(TestInteger[] testInteger, int startInd, int endInd) {
-        TestInteger Pivot = testInteger[endInd];
+        TestInteger pivot = testInteger[endInd];
         int i = startInd;
 
         for (int j = startInd; j < endInd; j++) {
-            if (testInteger[j].compareTo(Pivot) <= 0) {
+            if (testInteger[j].compareTo(pivot) <= 0) {
                 swap(testInteger, i ,j);
                 i = i + 1;
             }
