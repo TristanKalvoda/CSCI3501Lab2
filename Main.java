@@ -17,7 +17,6 @@ public class Main {
     // TEST CASES 1
     System.out.println("\nTest Case 1");
 
-   
 
     long starttimemerge = System.currentTimeMillis();
     Arrays.sort(generateTestInt2);
@@ -123,7 +122,52 @@ public class Main {
     System.out.println("TimeQuickSort3 " + (endtimequick3 - starttimequick3) + " ms");
     System.out.println("Counting : " + TestInteger.getCounter());
 
-    // System.out.println(Arrays.toString(testInteger1000SequencesDecreasing));
+    // Randomized Quick Sort
+    System.out.println("\nRandomized Quick Sort");
+
+    TestInteger[] generateTestInt3 = generateTestIntegers();
+    TestInteger[] generateTestInt4 = generateTestInt3;
+
+    TestInteger.resetCounter();
+
+    System.out.println("\nTest Case 1");
+
+    long starttimequick4 = System.currentTimeMillis();
+    randomizedQuickSort(generateTestInt3, 0, generateTestInt3.length-1);
+    long endtimequick4 = System.currentTimeMillis();
+    System.out.println("\nTimeRandomizedQuickSort " + (endtimequick4 - starttimequick4) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter());
+
+    TestInteger.resetCounter();
+
+    System.out.println("\nTest Case 2");
+
+    long starttimequick5 = System.currentTimeMillis();
+    randomizedQuickSort(testInteger1, 0, testInteger1.length-1);
+    long endtimequick5 = System.currentTimeMillis();
+    System.out.println("\nTimeRandomizedQuickSort1 " + (endtimequick5 - starttimequick5) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter());
+
+    TestInteger.resetCounter();
+
+    System.out.println("\nTest Case 3");
+
+    long starttimequick6 = System.currentTimeMillis();
+    randomizedQuickSort(testInteger1000sequences, 0, testInteger1000sequences.length-1);
+    long endtimequick6 = System.currentTimeMillis();
+    System.out.println("\nTimeRandomizedQuickSort2 " + (endtimequick6 - starttimequick6) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter());
+
+    TestInteger.resetCounter();
+
+    System.out.println("\nTest Case 4");
+
+    long starttimequick7 = System.currentTimeMillis();
+    randomizedQuickSort(testInteger1000SequencesDecreasing, 0, testInteger1000SequencesDecreasing.length-1);
+    long endtimequick7 = System.currentTimeMillis();
+    System.out.println("\nTimeRandomizedQuickSort3 " + (endtimequick7 - starttimequick7) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter());
+
     
     }
 
@@ -170,4 +214,56 @@ public class Main {
         return testIntegers;
     }
 
+    public static void randomizedQuickSort(TestInteger[] testInteger, int startInd, int endInd){
+        if (startInd >= endInd || startInd < 0) return;
+
+        int p = randomizedPartition(testInteger, startInd, endInd);
+
+        randomizedQuickSort(testInteger, startInd, p-1);
+        randomizedQuickSort(testInteger, p+1, endInd);
+    }
+
+    private static int randomizedPartition(TestInteger[] testInteger, int startInd, int endInd) {
+        int randomIndex = (int) (Math.random() * (endInd - startInd) + startInd);
+        swap(testInteger, randomIndex, endInd);
+        return partition(testInteger, startInd, endInd);
+    }
+
+    private static void medianOfThree(TestInteger[] testInteger, int startInd, int endInd) {
+        TestInteger randomIndexA = new TestInteger((int) (Math.random() * (endInd - startInd) + startInd));
+        TestInteger randomIndexB = new TestInteger((int) (Math.random() * (endInd - startInd) + startInd));
+        TestInteger randomIndexC = new TestInteger((int) (Math.random() * (endInd - startInd) + startInd));
+        
+        if (randomIndexA.compareTo(randomIndexB) > 0) {
+            if (randomIndexA.compareTo(randomIndexC) < 0) {
+                swap(testInteger, randomIndexA.value , endInd);
+
+            } else if (randomIndexB.compareTo(randomIndexC) > 0) {
+                swap(testInteger, randomIndexB.value , endInd);
+            } else {
+                swap(testInteger, randomIndexC.value , endInd);
+            }
+        } else {
+            if (randomIndexA.compareTo(randomIndexC) > 0) {
+                swap(testInteger, randomIndexA.value , endInd);
+            } else if (randomIndexB.compareTo(randomIndexC) < 0) {
+                swap(testInteger, randomIndexB.value , endInd);
+            } else {
+                swap(testInteger, randomIndexC.value , endInd);
+            }
+        }
+    }
+
+    public static TestInteger medianOfThreeQuickSort(TestInteger[] testInteger, int startInd, int endInd, int k) {
+        if (startInd >= endInd || startInd < 0) return;
+        if (endInd - startInd + 1 <= k) {
+            int p = partition(testInteger, startInd, endInd);
+            medianOfThreeQuickSort(testInteger, startInd, p-1, k);
+            medianOfThreeQuickSort(testInteger, p+1, endInd, k);
+        }
+        medianOfThree(testInteger, startInd, endInd);
+        int p = partition(testInteger, startInd, endInd);
+        medianOfThreeQuickSort(testInteger, startInd, p-1, k);
+        medianOfThreeQuickSort(testInteger, p+1, endInd, k);
+    }
 }
