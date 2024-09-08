@@ -14,6 +14,8 @@ public class Main {
     TestInteger[] generateTestInt1 = generateTestIntegers();
     TestInteger[] generateTestInt2 = generateTestInt1;
     TestInteger[] generateTestInt3 = generateTestInt1;
+    TestInteger[] generateTestInt4 = generateTestInt1;
+    TestInteger[] generateTestInt5 = generateTestInt1;
     
     // TEST CASES 1
     System.out.println("\nTest Case 1");
@@ -77,6 +79,8 @@ public class Main {
     }
 
     TestInteger[] testInteger1000sequences2 = testInteger1000sequences;
+    TestInteger[] testInteger1000sequences3 = testInteger1000sequences;
+    TestInteger[] testInteger1000sequences4 = testInteger1000sequences;
 
     TestInteger.resetCounter();
 
@@ -108,6 +112,8 @@ public class Main {
     }
 
     TestInteger[] testInteger1000SequencesDecreasing2 = testInteger1000SequencesDecreasing;
+    TestInteger[] testInteger1000SequencesDecreasing3 = testInteger1000SequencesDecreasing;
+    TestInteger[] testInteger1000SequencesDecreasing4 = testInteger1000SequencesDecreasing;
 
     TestInteger.resetCounter();
 
@@ -172,7 +178,91 @@ public class Main {
 
     //Median of three quicksort
     System.out.println("\nMedian of Three Pivot Selection");
-    System.out.println(Arrays.toString(testInteger1000sequences));
+    TestInteger.resetCounter();
+
+    System.out.println("\nTest Case 1");
+    long startimequick8 = System.currentTimeMillis();
+    medianOfThreeQuickSort(generateTestInt4, 0, generateTestInt4.length-1, 2);
+    long endtimequick8 = System.currentTimeMillis();
+
+    System.out.println("\nTimeMedianOfThreeQuickSort " + (endtimequick8 - startimequick8) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter());
+
+    TestInteger.resetCounter();
+
+    System.out.println("\nTest Case 2");
+    long startimequick9 = System.currentTimeMillis();
+    medianOfThreeQuickSort(testInteger1, 0, testInteger1.length-1, 2);
+    long endtimequick9 = System.currentTimeMillis();
+
+    System.out.println("\nTimeMedianOfThreeQuickSort1 " + (endtimequick9 - startimequick9) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter());
+
+    TestInteger.resetCounter();
+
+    System.out.println("\nTest Case 3");
+    long startimequick10 = System.currentTimeMillis();
+    medianOfThreeQuickSort(testInteger1000sequences3, 0, testInteger1000sequences3.length-1, 2);
+    long endtimequick10 = System.currentTimeMillis();
+
+    System.out.println("\nTimeMedianOfThreeQuickSort2 " + (endtimequick10 - startimequick10) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter());
+
+    TestInteger.resetCounter();
+
+    System.out.println("\nTest Case 4");
+    long startimequick11 = System.currentTimeMillis();
+    medianOfThreeQuickSort(testInteger1000SequencesDecreasing3, 0, testInteger1000SequencesDecreasing3.length-1, 2);
+    long endtimequick11 = System.currentTimeMillis();
+
+    System.out.println("\nTimeMedianOfThreeQuickSort3 " + (endtimequick11 - startimequick11) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter());
+
+    TestInteger.resetCounter();
+
+    // Quick Sort with Insertion Sort
+
+    System.out.println("\nQuick Sort with Insertion Sort");
+
+    System.out.println("\nTest Case 1");
+    long startimequick12 = System.currentTimeMillis();
+    quickSortInsertionSort(generateTestInt5, 0, generateTestInt5.length-1, 50);
+    long endtimequick12 = System.currentTimeMillis();
+
+    System.out.println("\nTimeQuickSortInsertionSort " + (endtimequick12 - startimequick12) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter());
+
+    TestInteger.resetCounter();
+
+    System.out.println("\nTest Case 2");
+    long startimequick13 = System.currentTimeMillis();
+    quickSortInsertionSort(testInteger1, 0, testInteger1.length-1, 50);
+    long endtimequick13 = System.currentTimeMillis();
+
+    System.out.println("\nTimeQuickSortInsertionSort1 " + (endtimequick13 - startimequick13) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter());
+
+    TestInteger.resetCounter();
+
+    System.out.println("\nTest Case 3");
+    long startimequick14 = System.currentTimeMillis();
+    quickSortInsertionSort(testInteger1000sequences4, 0, testInteger1000sequences4.length-1, 50);
+    long endtimequick14 = System.currentTimeMillis();
+
+    System.out.println("\nTimeQuickSortInsertionSort2 " + (endtimequick14 - startimequick14) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter());
+
+    TestInteger.resetCounter();
+
+    System.out.println("\nTest Case 4");
+    long startimequick15 = System.currentTimeMillis();
+    quickSortInsertionSort(testInteger1000SequencesDecreasing4, 0, testInteger1000SequencesDecreasing4.length-1, 50);
+    long endtimequick15 = System.currentTimeMillis();
+
+    System.out.println("\nTimeQuickSortInsertionSort3 " + (endtimequick15 - startimequick15) + " ms");
+    System.out.println("Counting : " + TestInteger.getCounter());
+
+    TestInteger.resetCounter();
     
     }
 
@@ -271,4 +361,29 @@ public class Main {
         medianOfThreeQuickSort(testInteger, startInd, p-1, k);
         medianOfThreeQuickSort(testInteger, p+1, endInd, k);
     }
+
+    public static void quickSortInsertionSort(TestInteger[] testInteger, int startInd, int endInd, int h) {
+        if (startInd >= endInd || startInd < 0) return;
+        if (endInd - startInd + 1 <= h) {
+            insertionSort(testInteger, startInd, endInd);
+        } else {
+            int p = partition(testInteger, startInd, endInd);
+            quickSortInsertionSort(testInteger, startInd, p-1, h);
+            quickSortInsertionSort(testInteger, p+1, endInd, h);
+        }
+
+    }
+
+    public static void insertionSort(TestInteger[] testInteger, int startInd, int endInd) {
+        for (int i = startInd + 1; i <= endInd; i++) {
+            TestInteger key = testInteger[i];
+            int j = i - 1;
+            while (j >= startInd && testInteger[j].compareTo(key) > 0) {
+                testInteger[j+1] = testInteger[j];
+                j = j - 1;
+            }
+            testInteger[j+1] = key;
+        }
+    }
+
 }
