@@ -13,6 +13,7 @@ public class Main {
 
     TestInteger[] generateTestInt1 = generateTestIntegers();
     TestInteger[] generateTestInt2 = generateTestInt1;
+    TestInteger[] generateTestInt3 = generateTestInt1;
     
     // TEST CASES 1
     System.out.println("\nTest Case 1");
@@ -75,6 +76,8 @@ public class Main {
         }
     }
 
+    TestInteger[] testInteger1000sequences2 = testInteger1000sequences;
+
     TestInteger.resetCounter();
 
     long starttimemerge2 = System.currentTimeMillis();
@@ -104,6 +107,8 @@ public class Main {
         }
     }
 
+    TestInteger[] testInteger1000SequencesDecreasing2 = testInteger1000SequencesDecreasing;
+
     TestInteger.resetCounter();
 
     long starttimemerge3 = System.currentTimeMillis();
@@ -124,9 +129,6 @@ public class Main {
 
     // Randomized Quick Sort
     System.out.println("\nRandomized Quick Sort");
-
-    TestInteger[] generateTestInt3 = generateTestIntegers();
-    TestInteger[] generateTestInt4 = generateTestInt3;
 
     TestInteger.resetCounter();
 
@@ -153,7 +155,7 @@ public class Main {
     System.out.println("\nTest Case 3");
 
     long starttimequick6 = System.currentTimeMillis();
-    randomizedQuickSort(testInteger1000sequences, 0, testInteger1000sequences.length-1);
+    randomizedQuickSort(testInteger1000sequences2, 0, testInteger1000sequences2.length-1);
     long endtimequick6 = System.currentTimeMillis();
     System.out.println("\nTimeRandomizedQuickSort2 " + (endtimequick6 - starttimequick6) + " ms");
     System.out.println("Counting : " + TestInteger.getCounter());
@@ -163,11 +165,14 @@ public class Main {
     System.out.println("\nTest Case 4");
 
     long starttimequick7 = System.currentTimeMillis();
-    randomizedQuickSort(testInteger1000SequencesDecreasing, 0, testInteger1000SequencesDecreasing.length-1);
+    randomizedQuickSort(testInteger1000SequencesDecreasing2, 0, testInteger1000SequencesDecreasing2.length-1);
     long endtimequick7 = System.currentTimeMillis();
     System.out.println("\nTimeRandomizedQuickSort3 " + (endtimequick7 - starttimequick7) + " ms");
     System.out.println("Counting : " + TestInteger.getCounter());
 
+    //Median of three quicksort
+    System.out.println("\nMedian of Three Pivot Selection");
+    System.out.println(Arrays.toString(testInteger1000sequences));
     
     }
 
@@ -254,7 +259,7 @@ public class Main {
         }
     }
 
-    public static TestInteger medianOfThreeQuickSort(TestInteger[] testInteger, int startInd, int endInd, int k) {
+    public static void medianOfThreeQuickSort(TestInteger[] testInteger, int startInd, int endInd, int k) {
         if (startInd >= endInd || startInd < 0) return;
         if (endInd - startInd + 1 <= k) {
             int p = partition(testInteger, startInd, endInd);
